@@ -24,4 +24,19 @@ class AttributeTest < Minitest::Test
     rex_attribute = Rex::Attribute.new(:amount, target: :total)
     assert_equal :total, rex_attribute.target
   end
+
+  def test_with_nested_attributes_returns_false_if_nested_attributes_is_not_set
+    rex_attribute = Rex::Attribute.new(:name)
+    refute rex_attribute.with_nested_attributes?
+  end
+
+  def test_with_nested_attributes_returns_false_if_nested_attributes_is_empty
+    rex_attribute = Rex::Attribute.new(:name, nested: [])
+    refute rex_attribute.with_nested_attributes?
+  end
+
+  def test_with_nested_attributes_returns_true_if_nested_attributes_is_not_empty
+    rex_attribute = Rex::Attribute.new(:name, nested: [Rex::Attribute.new(:first_name), Rex::Attribute.new(:last_name)])
+    assert rex_attribute.with_nested_attributes?
+  end
 end
