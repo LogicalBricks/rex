@@ -1,5 +1,5 @@
 require "rex/version"
+require "rex/attribute"
 
 module Rex
-  # Your code goes here...
 end
