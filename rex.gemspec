@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Azarel Doroteo Pacheco"]
   spec.email         = ["azareldp@gmail.com"]
 
-  spec.summary       = %q{Allow to filter and rename keys of nested hashes.}
-  spec.description   = %q{Allow to filter and rename keys of nested hashes.}
+  spec.summary       = %q{Allow filtering and renaming keys of nested hashes.}
+  spec.description   = %q{Allow filtering and renaming keys of nested hashes.}
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
