@@ -25,6 +25,26 @@ class AttributeTest < Minitest::Test
     assert_equal :total, rex_attribute.target
   end
 
+  def test_original_is_true_when_the_original_attribute_name_matches_with_the_parameter
+    rex_attribute = Rex::Attribute.new(:name)
+    assert rex_attribute.original?(:name)
+  end
+
+  def test_original_is_false_when_the_original_attribute_name_does_not_match_with_the_parameter
+    rex_attribute = Rex::Attribute.new(:name)
+    refute rex_attribute.original?(:full_name)
+  end
+
+  def test_target_is_true_when_the_target_attribute_name_matches_with_the_parameter
+    rex_attribute = Rex::Attribute.new(:name, target: :full_name)
+    assert rex_attribute.target?(:full_name)
+  end
+
+  def test_target_is_false_when_the_target_attribute_name_does_not_match_with_the_parameter
+    rex_attribute = Rex::Attribute.new(:name, target: :full_name)
+    refute rex_attribute.target?(:other)
+  end
+
   def test_with_nested_attributes_returns_false_if_nested_attributes_is_not_set
     rex_attribute = Rex::Attribute.new(:name)
     refute rex_attribute.with_nested_attributes?

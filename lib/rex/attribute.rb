@@ -10,4 +10,12 @@ class Rex::Attribute
   def with_nested_attributes?
     !@nested.empty?
   end
+
+  def original?(attr)
+    @original == attr
+  end
+
+  def target?(attr)
+    @target == attr
+  end
 end
