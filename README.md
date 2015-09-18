@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/LogicalBricks/rex.svg?branch=master)](https://travis-ci.org/LogicalBricks/rex)
+
 # Rex
 
 This gem allows filtering and renaming keys of nested hashes.
