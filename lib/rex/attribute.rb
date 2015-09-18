@@ -1,5 +1,5 @@
 class Rex::Attribute
-  attr_reader :original, :target
+  attr_reader :original, :target, :nested
 
   def initialize(original, target: nil, nested: [])
     @original = original

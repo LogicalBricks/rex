@@ -39,4 +39,10 @@ class AttributeTest < Minitest::Test
     rex_attribute = Rex::Attribute.new(:name, nested: [Rex::Attribute.new(:first_name), Rex::Attribute.new(:last_name)])
     assert rex_attribute.with_nested_attributes?
   end
+
+  def test_nested_returns_the_list_of_nested_attributes
+    nested_attributes = [Rex::Attribute.new(:first_name), Rex::Attribute.new(:last_name)]
+    rex_attribute = Rex::Attribute.new(:name, nested: nested_attributes)
+    assert_equal nested_attributes, rex_attribute.nested
+  end
 end
