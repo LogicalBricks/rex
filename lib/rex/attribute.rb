@@ -18,4 +18,12 @@ class Rex::Attribute
   def target?(attr)
     @target == attr
   end
+
+  def include_original?(attr)
+    !!nested.find{|n| n.original?(attr) }
+  end
+
+  def include_target?(attr)
+    !!nested.find{|n| n.target?(attr) }
+  end
 end

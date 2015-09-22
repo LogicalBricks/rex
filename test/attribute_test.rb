@@ -65,4 +65,40 @@ class AttributeTest < Minitest::Test
     rex_attribute = Rex::Attribute.new(:name, nested: nested_attributes)
     assert_equal nested_attributes, rex_attribute.nested
   end
+
+  def test_include_original_is_true_when_nested_attributes_include_the_attribute
+    rex_attribute = Rex::Attribute.new(:name, nested: [
+      Rex::Attribute.new(:first_name),
+      Rex::Attribute.new(:initial),
+      Rex::Attribute.new(:last_name),
+    ])
+    assert rex_attribute.include_original?(:first_name)
+  end
+
+  def test_include_original_is_false_when_nested_attributes_do_not_include_the_attribute
+    rex_attribute = Rex::Attribute.new(:name, nested: [
+      Rex::Attribute.new(:first_name),
+      Rex::Attribute.new(:initial),
+      Rex::Attribute.new(:last_name),
+    ])
+    refute rex_attribute.include_original?(:other)
+  end
+
+  def test_include_target_is_true_when_nested_attributes_include_the_attribute
+    rex_attribute = Rex::Attribute.new(:name, nested: [
+      Rex::Attribute.new(:first_name),
+      Rex::Attribute.new(:initial, target: :middle),
+      Rex::Attribute.new(:last_name),
+    ])
+    assert rex_attribute.include_target?(:middle)
+  end
+
+  def test_include_target_is_false_when_nested_attributes_do_not_include_the_attribute
+    rex_attribute = Rex::Attribute.new(:name, nested: [
+      Rex::Attribute.new(:first_name),
+      Rex::Attribute.new(:initial),
+      Rex::Attribute.new(:last_name),
+    ])
+    refute rex_attribute.include_target?(:other)
+  end
 end
