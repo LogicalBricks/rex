@@ -101,4 +101,42 @@ class AttributeTest < Minitest::Test
     ])
     refute rex_attribute.include_target?(:other)
   end
+
+  def test_nested_for_returns_the_nested_attribute_that_matches_with_the_original
+    first_name = Rex::Attribute.new(:first_name)
+    initial = Rex::Attribute.new(:initial)
+    last_name = Rex::Attribute.new(:last_name)
+    rex_attribute = Rex::Attribute.new(:name, nested: [
+      first_name,
+      initial,
+      last_name,
+    ])
+    assert_equal initial, rex_attribute.nested_for(original: :initial)
+    assert_equal last_name, rex_attribute.nested_for(original: :last_name)
+  end
+
+  def test_nested_for_returns_the_nested_attribute_that_matches_with_the_target
+    first_name = Rex::Attribute.new(:first_name)
+    initial = Rex::Attribute.new(:initial, target: :middle_name)
+    last_name = Rex::Attribute.new(:last_name)
+    rex_attribute = Rex::Attribute.new(:name, nested: [
+      first_name,
+      initial,
+      last_name,
+    ])
+    assert_equal initial, rex_attribute.nested_for(target: :middle_name)
+    assert_equal last_name, rex_attribute.nested_for(target: :last_name)
+  end
+
+  def test_nested_for_returns_nil_if_none_matches
+    first_name = Rex::Attribute.new(:first_name)
+    initial = Rex::Attribute.new(:initial, target: :middle_name)
+    last_name = Rex::Attribute.new(:last_name)
+    rex_attribute = Rex::Attribute.new(:name, nested: [
+      first_name,
+      initial,
+      last_name,
+    ])
+    assert_equal nil, rex_attribute.nested_for(target: :other)
+  end
 end

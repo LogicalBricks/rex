@@ -19,6 +19,14 @@ class Rex::Attribute
     @target == attr
   end
 
+  def nested_for(original: nil, target: nil)
+    if original
+      nested.find{|n| n.original?(original) }
+    elsif target
+      nested.find{|n| n.target?(target) }
+    end
+  end
+
   def include_original?(attr)
     !!nested.find{|n| n.original?(attr) }
   end
