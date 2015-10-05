@@ -126,6 +126,7 @@ class AttributeTest < Minitest::Test
     ])
     assert_equal initial, rex_attribute.nested_for(target: :middle_name)
     assert_equal last_name, rex_attribute.nested_for(target: :last_name)
+    assert_equal first_name, rex_attribute.nested_for(original: :first_name)
   end
 
   def test_nested_for_returns_nil_if_none_matches
@@ -138,5 +139,6 @@ class AttributeTest < Minitest::Test
       last_name,
     ])
     assert_equal nil, rex_attribute.nested_for(target: :other)
+    assert_equal nil, rex_attribute.nested_for(original: :other)
   end
 end
